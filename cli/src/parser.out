@@ -1,0 +1,63 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> assignment
+Rule 1     assignment -> WORD ASSIGNMENT WORD
+Rule 2     command -> WORD
+Rule 3     command -> command WORD
+Rule 4     command -> command QUOTED_STRING
+Rule 5     command_line -> command
+Rule 6     command_line -> command PIPE command_line
+
+Terminals, with rules where they appear
+
+ASSIGNMENT           : 1
+PIPE                 : 6
+QUOTED_STRING        : 4
+WORD                 : 1 1 2 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 0
+command              : 3 4 5 6
+command_line         : 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . assignment
+    (1) assignment -> . WORD ASSIGNMENT WORD
+
+    WORD            shift and go to state 2
+
+    assignment                     shift and go to state 1
+
+state 1
+
+    (0) S' -> assignment .
+
+
+
+state 2
+
+    (1) assignment -> WORD . ASSIGNMENT WORD
+
+    ASSIGNMENT      shift and go to state 3
+
+
+state 3
+
+    (1) assignment -> WORD ASSIGNMENT . WORD
+
+    WORD            shift and go to state 4
+
+
+state 4
+
+    (1) assignment -> WORD ASSIGNMENT WORD .
+
+    $end            reduce using rule 1 (assignment -> WORD ASSIGNMENT WORD .)
+
