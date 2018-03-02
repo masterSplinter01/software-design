@@ -1,5 +1,4 @@
 import src.ply.lex as lex
-import src.ply.yacc as yacc
 
 tokens = ('ASSIGNMENT', 'WORD', 'PIPE', 'QUOTED_STRING',)
 
@@ -16,23 +15,13 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-def p_assignment(p):
-    '''assignment : WORD ASSIGNMENT WORD'''
+lx = lex.lex()
 
 
-def p_command(p):
-    '''command : WORD
-                | command WORD
-                | command QUOTED_STRING '''
+'''
+data = 'echo "sdf" | x=13 | x = 13'
+lx = Lexer()
+tok = lx.get_tokens(data)
+print(tok)
 
-
-def p_command_line(p):
-    '''command_line : command
-                    | command PIPE command_line '''
-
-
-data = 'echo "sdf" | x=13| x = 13'
-lexer = lex.lex()
-lexer.input(data)
-parser = yacc.yacc()
-print(parser.parse(data))
+'''
