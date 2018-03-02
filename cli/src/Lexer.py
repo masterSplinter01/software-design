@@ -14,8 +14,9 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-
+data = 'echo "sdf" | x=13| x = 13'
 lx = lex.lex()
+lx.input(data)
 
 
 '''
